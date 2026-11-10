@@ -1,0 +1,37 @@
+[package]
+name = "gg"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "gg"
+path = "src/main.rs"
+
+[[bin]]
+name = "unlock"
+path = "src/bin/unlock.rs"
+
+[dependencies]
+aes = "0.8"
+sha2 = "0.10"
+hmac = "0.12"
+pbkdf2 = { version = "0.12", features = ["hmac"] }
+rand = "0.8"
+rayon = "1.10"
+walkdir = "2.5"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+ab_glyph = "0.2"
+imageproc = "0.25"
+ureq = { version = "2.10", features = ["tls"] }
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_Storage_FileSystem",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Console",
+] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
